@@ -2,9 +2,19 @@ const express = require('express');
 const app = express();
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+
 
 const productRoutes = require('./api/routes/products');
 const orderRoutes = require('./api/routes/orders');
+
+//connection to mongoDB
+mongoose.connect('mongodb+srv://node-shop:' + process.env.MONGO_ATLAS_PW + '@node-rest-shop-utjpf.mongodb.net/test?retryWrites=true&w=majority', {
+    useNewUrlParser: true, useUnifiedTopology: true,
+});
+//2nd argument object added to connect function is deprecated
+// { useNewUrlParser: true });
+
 
 //logs requests
 app.use(morgan('dev'));
